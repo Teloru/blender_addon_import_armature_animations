@@ -135,7 +135,5 @@ class BlenderObjectWithMeshGeometryConstructor:
 
     def _apply_normals(self, animated_export_object: AnimatedExportObjectModel, mesh_obj: Object):
         normals_definitions = animated_export_object.mesh_geometry.normals  # type: List[Vector3d]
-        for mesh_vertex_index, mesh_vertex in enumerate(mesh_obj.data.vertices):
-            mesh_vertex.normal[0] = normals_definitions[mesh_vertex_index].x
-            mesh_vertex.normal[1] = normals_definitions[mesh_vertex_index].y
-            mesh_vertex.normal[2] = normals_definitions[mesh_vertex_index].z
+        normals = [(n.x, n.y, n.z) for n in normals_definitions]
+        mesh_obj.data.normals_split_custom_set_from_vertices(normals)
