@@ -14,8 +14,16 @@ bl_info = {
 import bpy
 
 from .addon_integration.create_animated_armature_op import CreateAnimatedArmatureOperator
-from .addon_integration.addon_panel import AddonPanel
+from .addon_integration.addon_panel import AddonPanel, register_properties, unregister_properties
 
 classes = (CreateAnimatedArmatureOperator, AddonPanel)
 
-register, unregister = bpy.utils.register_classes_factory(classes)
+def register():
+    register_properties()
+    for cls in classes:
+        bpy.utils.register_class(cls)
+
+def unregister():
+    unregister_properties()
+    for cls in reversed(classes):
+        bpy.utils.unregister_class(cls)

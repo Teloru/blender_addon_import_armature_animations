@@ -10,6 +10,7 @@ class CreateAnimatedArmatureOperator(bpy.types.Operator):
     bl_description = "Import animated armature from Raymap"
 
     def execute(self, context):
-        #TestArmatureBonesOrientationEditPoseModes().run()
-        MainAddonLogic().run()
+        animations_path = context.scene.animations_json_path
+        objects_library_path = context.scene.objects_library_json_path
+        MainAddonLogic().run(animations_path, objects_library_path)
         return {'FINISHED'}

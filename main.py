@@ -7,11 +7,8 @@ from .model.objects.constructing.export_objects_library_model_loader import Expo
 
 
 class MainAddonLogic:
-    def run(self):
+    def run(self, path_to_animations_file, path_to_objects_library_file):
         print("Running addon!")
-        path_to_animations_file = "D:/exported_rayman_animations.json"
-        path_to_objects_library_file = "D:/exported_rayman_meshes.json"
-
         export_objects_library_model = ExportObjectsLibraryModelLoader().load(path_to_objects_library_file)
         # armature_animation_clips_model = ArmatureWithAnimationClipsModelForTestLoader().load(path_to_animations_file)
 

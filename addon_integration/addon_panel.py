@@ -1,3 +1,18 @@
+def register_properties():
+    import bpy
+    bpy.types.Scene.animations_json_path = bpy.props.StringProperty(
+        description="Chemin vers le fichier JSON des animations",
+        subtype='FILE_PATH'
+    )
+    bpy.types.Scene.objects_library_json_path = bpy.props.StringProperty(
+        description="Chemin vers le fichier JSON des objets",
+        subtype='FILE_PATH'
+    )
+
+def unregister_properties():
+    import bpy
+    del bpy.types.Scene.animations_json_path
+    del bpy.types.Scene.objects_library_json_path
 import bpy
 
 
@@ -10,5 +25,9 @@ class AddonPanel(bpy.types.Panel):
 
     def draw(self, context):
         layout = self.layout
+        layout.label(text="Animations JSON Path:")
+        layout.prop(context.scene, "animations_json_path", text="")
+        layout.label(text="Objects Library JSON Path:")
+        layout.prop(context.scene, "objects_library_json_path", text="")
         row = layout.row()
         row.operator("view3d.import_animated_armature", text="Import animated armature from Raymap")
